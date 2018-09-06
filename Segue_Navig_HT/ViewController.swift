@@ -10,16 +10,42 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+    @IBOutlet weak var userName: UITextField!
+    
+    var titleMessage : String = ""
+    // результат будем выводить в заголовок конечного контроллера с помощью этой переменной
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func loginButton(_ sender: Any)
+    {
+        if userName.text != ""
+        {
+            titleMessage = "Пользователь: \(userName.text!)"
+            performSegue(withIdentifier: "showTitle", sender: nil)
+        }
     }
-
-
+    
+    @IBAction func forgotLoginButton(_ sender: Any)
+    {
+        titleMessage = "Восстановить логин"
+        performSegue(withIdentifier: "showTitle", sender: nil)
+    }
+    
+    @IBAction func forgotPasswordButton(_ sender: Any)
+    {
+        titleMessage = "Восстановить пароль"
+        performSegue(withIdentifier: "showTitle", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.navigationItem.title = titleMessage
+    }
+    
+    
 }
 
